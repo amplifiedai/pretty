@@ -1,0 +1,36 @@
+{
+  "editor.rulers": [
+    98
+  ],
+  "editor.formatOnSave": true,
+  "workbench.colorCustomizations": {
+    "activityBar.activeBorder": "#f9bd85",
+    "activityBar.background": "#ad68f8",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#f9bd85",
+    "activityBarBadge.foreground": "#15202b",
+    "statusBar.background": "#9337f6",
+    "statusBar.foreground": "#e7e7e7",
+    "statusBarItem.hoverBackground": "#ad68f8",
+    "titleBar.activeBackground": "#9337f6",
+    "titleBar.activeForeground": "#e7e7e7",
+    "titleBar.inactiveBackground": "#9337f699",
+    "titleBar.inactiveForeground": "#e7e7e799"
+  },
+  "peacock.affectActivityBar": true,
+  "peacock.color": "#9337f6",
+  "peacock.remoteColor": "#9337f6",
+  "markdownlint.config": {
+    "default": true,
+    "MD003": {
+      "style": "atx"
+    },
+    "MD007": {
+      "indent": 4
+    },
+    "MD013": {
+      "line_length": 98
+    },
+  }
+}
