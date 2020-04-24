@@ -10,14 +10,14 @@ defmodule Pretty.MixProject do
       docs: docs(),
       elixir: "~> 1.9",
       elixirc_paths: elixirc_paths(Mix.env()),
-      homepage_url: "https://github.com/amplified/pretty",
+      homepage_url: "https://github.com/amplifiedai/pretty",
       name: "Pretty",
       package: package(),
       preferred_cli_env: preferred_cli_env(),
-      source_url: "https://github.com/amplified/pretty",
+      source_url: "https://github.com/amplifiedai/pretty",
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      version: "1.0.3"
+      version: "1.0.4"
     ]
   end
 
