@@ -17,7 +17,7 @@ defmodule Pretty.MixProject do
       source_url: "https://github.com/amplified/pretty",
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      version: "1.0.2"
+      version: "1.0.3"
     ]
   end
 
@@ -61,7 +61,7 @@ defmodule Pretty.MixProject do
       licenses: ["Apache 2.0"],
       links: %{
         "Amplified" => "https://www.amplified.ai",
-        "GitHub" => "https://github.com/amplified/pretty"
+        "GitHub" => "https://github.com/amplifiedai/pretty"
       }
     ]
   end
