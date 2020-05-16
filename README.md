@@ -59,22 +59,16 @@ end
 
 ## Development
 
-Dependency management:
+`make check` before you commit! Otherwise:
 
 * `mix deps.get` to get your dependencies
 * `mix deps.compile` to compile them
-
-Finding problems:
-
 * `mix compile` to compile your code
 * `mix credo` to suggest more idiomatic style for it
 * `mix dialyzer` to find problems static typing might spot... *slowly*
 * `mix test` to run unit tests
 * `mix test.watch` to run the tests again whenever you change something
 * `mix coveralls` to check test coverage
-
-Documentation:
-
 * `mix docs` to generate documentation for this project
 * `mix help` to find out what else you can do with `mix`
 
