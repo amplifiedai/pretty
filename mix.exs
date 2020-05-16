@@ -17,7 +17,7 @@ defmodule Pretty.MixProject do
       source_url: "https://github.com/amplifiedai/pretty",
       start_permanent: Mix.env() == :prod,
       test_coverage: [tool: ExCoveralls],
-      version: "1.0.4"
+      version: "1.0.5"
     ]
   end
 
