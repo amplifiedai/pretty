@@ -1,10 +1,5 @@
 # Explanation
 
-If you're sitting at a remote console _right now_ and just need some output to your console from
-another process, [BREAK GLASS](#break-glass).
-
-If not, read on:
-
 ## The Case of the Missing Output
 
 Hooking up telemetry to `Ecto.Adapters.SQL` to watch your requests in action works from
@@ -202,33 +197,6 @@ becomes:
 
 ```elixir
 dump = Pretty.bind(label: "Ecto")
-handler = fn name, m10s, m6a, nil -> dump.({name, m10s, m6a}) end
-:telemetry.attach(self(), [:my_app, :repo, :query], handler, nil)
-```
-
-If you're in too much of a hurry to take a new dependency, though:
-
-## BREAK GLASS
-
-Paste this in to get most of the functionality of `Pretty.bind/1` right away:
-
-```elixir
-bind = fn opts ->
-  device = Process.group_leader()
-  width = with {:ok, n} <- :io.columns(device), do: n, else: (_ -> %Inspect.Opts{}.width)
-  opts = Keyword.merge(:rpc.call(:erlang.node(device), IEx.Config, :inspect_opts, []), opts)
-  opts = Keyword.merge(opts, pretty: true, width: width)
-  reset = Enum.find_value(Keyword.get(opts, :syntax_colors, []), [], fn _ -> IO.ANSI.reset() end)
-  fn term -> IO.puts(device, [Kernel.inspect(term, opts), reset]); term end
-end
-# I never said it'd be Pretty...
-# Can you make it shorter? PR or it didn't happen.
-```
-
-... and then use that:
-
-```elixir
-dump = bind.(label: "ecto")
 handler = fn name, m10s, m6a, nil -> dump.({name, m10s, m6a}) end
 :telemetry.attach(self(), [:my_app, :repo, :query], handler, nil)
 ```

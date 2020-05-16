@@ -1,19 +1,22 @@
 # Pretty
 
+<!-- MDOC !-->
+Inspect values with syntax colors despite your remote console.
+
 This module addresses two surprises you'll encounter trying to dump data to the remote console
 like you did during development with `iex -S mix`:
 
-* `IO.inspect/1` _et al_ work fine at the `iex>` prompt but their output goes to the server's
-  logs, not your console when you call them from inside a `:telemetry` handler function or other
-  troubleshooting mechanism
+* `IO.inspect/1` _et al_ work fine at the `iex>` prompt but somehow not when called from a
+  `:telemetry` handler function or other troubleshooting mechanism... unless you think to
+  look at the log output
 
-* The syntax colors aren't working
+* The syntax colors aren't working like you think they should, either
 
-* The inspection width is 80&hellip; just like `iex`, now that you think of it
+* The inspection width is 80... just like `iex`, now that you think of it
 
 Why? See the [explanation](EXPLAIN.md).
 
-In case of emergency, [BREAK GLASS](#break-glass) to get what you need with some copying and
+In case of emergency, **BREAK GLASS** (see below) to get what you need with some copying and
 pasting.
 
 ## Usage
@@ -29,9 +32,9 @@ Pretty.inspect(<<0, 1, 2>>, width: 40)
 
 ```elixir
 [1, 2, 3]
-|> IO.inspect(label: "before")
+|> Pretty.inspect(label: "before")
 |> Enum.map(&(&1 * 2))
-|> IO.inspect(label: "after")
+|> Pretty.inspect(label: "after")
 |> Enum.sum()
 ```
 
@@ -43,34 +46,6 @@ dump = Pretty.bind(label: "Ecto")
 handler = fn name, m10s, m6a, nil -> dump.({name, m10s, m6a}) end
 :telemetry.attach(self(), [:my_app, :repo, :query], handler, nil)
 ```
-
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed by adding
-`pretty` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:pretty, "~> 1.0.0"}
-  ]
-end
-```
-
-## Development
-
-`make check` before you commit! Otherwise:
-
-* `mix deps.get` to get your dependencies
-* `mix deps.compile` to compile them
-* `mix compile` to compile your code
-* `mix credo` to suggest more idiomatic style for it
-* `mix dialyzer` to find problems static typing might spot... *slowly*
-* `mix test` to run unit tests
-* `mix test.watch` to run the tests again whenever you change something
-* `mix coveralls` to check test coverage
-* `mix docs` to generate documentation for this project
-* `mix help` to find out what else you can do with `mix`
 
 ## BREAK GLASS
 
@@ -98,3 +73,34 @@ dump = bind.(label: "ecto")
 handler = fn name, m10s, m6a, nil -> dump.({name, m10s, m6a}) end
 :telemetry.attach(self(), [:my_app, :repo, :query], handler, nil)
 ```
+
+What's going on? See the [explanation](EXPLAIN.md).
+
+<!-- MDOC !-->
+## Installation
+
+If [available in Hex](https://hex.pm/docs/publish), the package can be installed by adding
+`pretty` to your list of dependencies in `mix.exs`:
+
+```elixir
+def deps do
+  [
+    {:pretty, "~> 1.0.0"}
+  ]
+end
+```
+
+## Development
+
+`make check` before you commit! Otherwise:
+
+* `mix deps.get` to get your dependencies
+* `mix deps.compile` to compile them
+* `mix compile` to compile your code
+* `mix credo` to suggest more idiomatic style for it
+* `mix dialyzer` to find problems static typing might spot... *slowly*
+* `mix test` to run unit tests
+* `mix test.watch` to run the tests again whenever you change something
+* `mix coveralls` to check test coverage
+* `mix docs` to generate documentation for this project
+* `mix help` to find out what else you can do with `mix`

@@ -1,45 +1,8 @@
 defmodule Pretty do
-  @moduledoc """
-  Inspect values with syntax colors despite your remote console.
-
-  This module addresses two surprises you'll encounter trying to dump data to the remote console
-  like you did during development with `iex -S mix`:
-
-  * `IO.inspect/1` _et al_ work fine at the `iex>` prompt but their output goes to the server's
-    logs, not your console when you call them from inside a `:telemetry` handler function or other
-    troubleshooting mechanism
-
-  * The syntax colors aren't working
-
-  * The inspection width is 80&hellip; just like `iex`, now that you think of it
-
-  Why? See the [explanation](EXPLAIN.html).
-
-  In case of emergency, [BREAK GLASS](explain.html#break-glass) to get what you need with some
-  copying and pasting.
-
-  ## Usage
-
-  To get the right syntax colors and inspection width, replace your calls to `IO.inspect/1` with
-  calls to `Pretty.inspect/1`:
-
-      Pretty.inspect(<<0, 1, 2>>, width: 40)
-
-  ... and the same for `IO.inspect/2`:
-
-      [1, 2, 3]
-      |> IO.inspect(label: "before")
-      |> Enum.map(&(&1 * 2))
-      |> IO.inspect(label: "after")
-      |> Enum.sum()
-
-  To get the right colors, width, and output device, use `Pretty.bind/1` to get an `t:inspector/1`
-  function, and use it instead of `IO.inspect/1` or `Pretty.inspect/1`:
-
-      dump = Pretty.bind(label: "Ecto")
-      handler = fn name, m10s, m6a, nil -> dump.({name, m10s, m6a}) end
-      :telemetry.attach(self(), [:my_app, :repo, :query], handler, nil)
-  """
+  @moduledoc "README.md"
+             |> File.read!()
+             |> String.split("<!-- MDOC !-->")
+             |> Enum.fetch!(1)
 
   @typedoc "Keyword options supported by `IO.inspect/2`."
   @type inspect_opts() :: keyword()

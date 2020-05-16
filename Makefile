@@ -1,6 +1,6 @@
 .PHONY: check clean
 
-check: deps
+check: deps lib/pretty.ex
 	mix format --check-formatted --dry-run --check-equivalent
 	mix compile --warnings-as-errors
 	mix coveralls.html
@@ -11,6 +11,9 @@ check: deps
 
 deps: mix.lock
 	mix deps.get
+
+lib/pretty.ex: README.md
+	touch $@
 
 clean:
 	rm -rf _build/test/lib _build/dev/lib _build/prod/lib cover deps doc
