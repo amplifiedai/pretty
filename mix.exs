@@ -31,7 +31,7 @@ defmodule Pretty.MixProject do
     [
       {:credo, "~> 1.4.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.0.0", only: [:dev], runtime: false},
-      {:ex_doc, "~> 0.21.3", only: :dev, runtime: false},
+      {:ex_doc, "~> 0.22.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.12.3", only: [:dev, :test]},
       {:mix_test_watch, "~> 1.0.2", only: :test, runtime: false}
     ]
