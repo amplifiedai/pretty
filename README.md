@@ -1,6 +1,6 @@
 # Pretty
 
-[![Build status badge](https://github.com/amplified/pretty/workflows/Elixir%20CI/badge.svg)](https://github.com/amplified/pretty/actions)
+[![Build status badge](https://github.com/amplifiedai/pretty/workflows/Elixir%20CI/badge.svg)](https://github.com/amplifiedai/pretty/actions)
 [![Hex version badge](https://img.shields.io/hexpm/v/pretty.svg)](https://hex.pm/packages/pretty)
 
 <!-- MDOC -->
