@@ -1,5 +1,8 @@
 # Pretty
 
+[![Build status badge](https://github.com/amplified/pretty/workflows/Elixir%20CI/badge.svg)](https://github.com/amplified/pretty/actions)
+[![Hex version badge](https://img.shields.io/hexpm/v/pretty.svg)](https://hex.pm/packages/pretty)
+
 <!-- MDOC -->
 <!-- INCLUDE -->
 Inspect values with syntax colors despite your remote console.
@@ -80,8 +83,7 @@ What's going on? See the [explanation](#explanation).
 <!-- MDOC -->
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed by adding
-`pretty` to your list of dependencies in `mix.exs`:
+Add `pretty` to your list of dependencies in `mix.exs`:
 
 ```elixir
 def deps do
