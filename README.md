@@ -102,5 +102,5 @@ end
 * `mix test` to run unit tests
 * `mix test.watch` to run the tests again whenever you change something
 * `mix coveralls` to check test coverage
-* `mix docs` to generate documentation for this project
+* `touch lib/pretty.ex && mix docs` to generate documentation for this project
 * `mix help` to find out what else you can do with `mix`
