@@ -93,18 +93,14 @@ end
 
 ## Development
 
-`make check` before you commit! Otherwise:
+`make check` before you commit! If you'd prefer to do it manually:
 
-* `mix deps.get` to get your dependencies
-* `mix deps.compile` to compile them
-* `mix compile` to compile your code
-* `mix credo` to suggest more idiomatic style for it
-* `mix dialyzer` to find problems static typing might spot… *slowly*
-* `mix test` to run unit tests
-* `mix test.watch` to run the tests again whenever you change something
-* `mix coveralls` to check test coverage
-* `touch lib/pretty.ex && mix docs` to generate documentation for this project
-* `mix help` to find out what else you can do with `mix`
+* `mix do deps.get, deps.unlock --unused, deps.clean --unused` if you change dependencies
+* `mix compile --warnings-as-errors` for a stricter compile
+* `mix coveralls.html` to check for test coverage
+* `mix credo --strict` to suggest more idiomatic style for your code
+* `mix dialyzer` to find problems typing might reveal… albeit *slowly*
+* `touch lib/pretty.ex && mix docs` to generate documentation
 
 <!-- MDOC -->
 <!-- INCLUDE -->

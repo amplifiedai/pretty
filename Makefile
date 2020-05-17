@@ -5,7 +5,7 @@ check: deps lib/pretty.ex
 	mix compile --warnings-as-errors
 	mix coveralls.html
 	mix credo --strict
-	mix dialyzer --halt-exit-status
+	mix dialyzer
 	mix docs
 	@echo "OK"
 
