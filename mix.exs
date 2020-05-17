@@ -8,7 +8,7 @@ defmodule Pretty.MixProject do
       description: "Inspect values with syntax colors despite your remote console.",
       dialyzer: dialyzer(),
       docs: docs(),
-      elixir: "~> 1.9",
+      elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
       homepage_url: "https://github.com/amplifiedai/pretty",
       name: "Pretty",
