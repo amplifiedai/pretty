@@ -7,12 +7,12 @@ This module addresses two surprises you'll encounter trying to dump data to the 
 like you did during development with `iex -S mix`:
 
 * `IO.inspect/1` _et al_ work fine at the `iex>` prompt but somehow not when called from a
-  `:telemetry` handler function or other troubleshooting mechanism... unless you think to
+  `:telemetry` handler function or other troubleshooting mechanism… unless you think to
   look at the log output
 
 * The syntax colors aren't working like you think they should, either
 
-* The inspection width is 80... just like `iex`, now that you think of it
+* The inspection width is 80… just like `iex`, now that you think of it
 
 Why? See the [explanation](EXPLAIN.md).
 
@@ -28,7 +28,7 @@ calls to `Pretty.inspect/1`:
 Pretty.inspect(<<0, 1, 2>>, width: 40)
 ```
 
-... and `IO.inspect/2` with `Pretty.inspect/2`:
+… and `IO.inspect/2` with `Pretty.inspect/2`:
 
 ```elixir
 [1, 2, 3]
@@ -66,7 +66,7 @@ end
 # Can you make it shorter? PR or it didn't happen.
 ```
 
-... and then use that:
+… and then use that:
 
 ```elixir
 dump = bind.(label: "ecto")
@@ -98,7 +98,7 @@ end
 * `mix deps.compile` to compile them
 * `mix compile` to compile your code
 * `mix credo` to suggest more idiomatic style for it
-* `mix dialyzer` to find problems static typing might spot... *slowly*
+* `mix dialyzer` to find problems static typing might spot… *slowly*
 * `mix test` to run unit tests
 * `mix test.watch` to run the tests again whenever you change something
 * `mix coveralls` to check test coverage
