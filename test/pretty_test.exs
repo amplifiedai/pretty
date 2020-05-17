@@ -1,9 +1,6 @@
 defmodule PrettyTest do
   use ExUnit.Case, async: false
 
-  import Pretty
-  doctest Pretty
-
   defp expect(device, request, reply) when is_pid(device) do
     TestDevice.expect(device, request, reply)
   end
@@ -52,16 +49,16 @@ defmodule PrettyTest do
 
   describe "get_ansi_reset/1 (internal)" do
     test "no :syntax_colors" do
-      assert [] = get_ansi_reset([])
+      assert [] = Pretty.get_ansi_reset([])
     end
 
     test "empty :syntax_colors" do
-      assert [] = get_ansi_reset(syntax_colors: [])
+      assert [] = Pretty.get_ansi_reset(syntax_colors: [])
     end
 
     test "non-empty :syntax_colors" do
       reset = IO.ANSI.reset()
-      assert ^reset = get_ansi_reset(syntax_colors: [reset: :yellow])
+      assert ^reset = Pretty.get_ansi_reset(syntax_colors: [reset: :yellow])
     end
   end
 
@@ -77,7 +74,7 @@ defmodule PrettyTest do
 
       inspector =
         controlled(
-          fn -> bind() end,
+          fn -> Pretty.bind() end,
           group_leader: device,
           ansi_enabled: false
         )
@@ -98,7 +95,7 @@ defmodule PrettyTest do
 
       inspector =
         controlled(
-          fn -> bind(label: "n") end,
+          fn -> Pretty.bind(label: "n") end,
           group_leader: device,
           ansi_enabled: false
         )
@@ -122,7 +119,7 @@ defmodule PrettyTest do
 
       inspector =
         controlled(
-          fn -> bind(:stdio, label: "label") end,
+          fn -> Pretty.bind(:stdio, label: "label") end,
           group_leader: device,
           ansi_enabled: false
         )
@@ -155,33 +152,33 @@ defmodule PrettyTest do
   describe "resolve_device/1 (internal)" do
     test "pid" do
       device = open_test_device()
-      assert ^device = resolve_device(device)
+      assert ^device = Pretty.resolve_device(device)
     end
 
     test "named device" do
       device = open_test_device()
       Process.register(device, __MODULE__)
-      assert ^device = resolve_device(__MODULE__)
+      assert ^device = Pretty.resolve_device(__MODULE__)
     end
 
     test ":standard_error" do
       pid = Process.whereis(:standard_error)
-      assert ^pid = resolve_device(:standard_error)
+      assert ^pid = Pretty.resolve_device(:standard_error)
     end
 
     test ":standard_io" do
       pid = Process.group_leader()
-      assert ^pid = resolve_device(:standard_io)
+      assert ^pid = Pretty.resolve_device(:standard_io)
     end
 
     test ":stderr" do
       pid = Process.whereis(:standard_error)
-      assert ^pid = resolve_device(:stderr)
+      assert ^pid = Pretty.resolve_device(:stderr)
     end
 
     test ":stdio" do
       pid = Process.group_leader()
-      assert ^pid = resolve_device(:stdio)
+      assert ^pid = Pretty.resolve_device(:stdio)
     end
   end
 
@@ -189,13 +186,13 @@ defmodule PrettyTest do
     test "device without columns" do
       device = open_test_device() |> expect({:get_geometry, :columns}, {:error, :enotsup})
       default_width = %Inspect.Opts{}.width
-      assert ^default_width = width(device)
+      assert ^default_width = Pretty.width(device)
       check!(device)
     end
 
     test "device with columns" do
       device = open_test_device() |> expect({:get_geometry, :columns}, 98)
-      assert 98 = width(device)
+      assert 98 = Pretty.width(device)
       check!(device)
     end
   end

@@ -48,7 +48,6 @@ defmodule Pretty.MixProject do
 
   defp docs do
     [
-      extras: ["EXPLAIN.md"],
       main: "Pretty"
     ]
   end

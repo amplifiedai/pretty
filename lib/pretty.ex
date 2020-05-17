@@ -1,8 +1,13 @@
 defmodule Pretty do
   @moduledoc "README.md"
              |> File.read!()
-             |> String.split("<!-- MDOC !-->")
-             |> Enum.fetch!(1)
+             |> String.split("<!-- MDOC -->")
+             |> Enum.filter(&(&1 =~ ~R{<!\-\-\ INCLUDE\ \-\->}))
+             |> Enum.join("\n")
+             # strip comments https://github.com/elixir-lang/ex_doc/issues/1169
+             |> (&Regex.replace(~R{<!\-\-.*?\-\->}, &1, "")).()
+             # compensate for anchor id differences between ExDoc and GitHub
+             |> (&Regex.replace(~R{\(\#\K(?=[a-z][a-z0-9-]+\))}, &1, "module-")).()
 
   @typedoc "Keyword options supported by `IO.inspect/2`."
   @type inspect_opts() :: keyword()
