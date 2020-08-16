@@ -1,7 +1,6 @@
 {
   "recommendations": [
-    "EditorConfig.EditorConfig",
-    "davidanson.vscode-markdownlint",
-    "jakebecker.elixir-ls"
+    "editorconfig.editorconfig",
+    "elixir-lsp.elixir-ls"
   ]
 }

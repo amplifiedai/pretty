@@ -83,12 +83,12 @@ defmodule TestDevice do
 
       {:mock_request, pid, ref, {:expect, request, reply}} ->
         Process.send(pid, {:mock_reply, ref, :ok}, [])
-        loop(state |> State.expect({request, reply}))
+        state |> State.expect({request, reply}) |> loop()
 
       {:mock_request, pid, ref, :flush} ->
         unsatisfied = State.list_remaining_expectations(state)
         Process.send(pid, {:mock_reply, ref, {:ok, unsatisfied}}, [])
-        loop(state |> State.flush())
+        state |> State.flush() |> loop()
 
       {:io_request, pid, ref, request} ->
         {{expected, reply}, state} = State.pop_next_expectation(state)

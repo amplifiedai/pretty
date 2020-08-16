@@ -100,9 +100,9 @@ end
 * `mix do deps.get, deps.unlock --unused, deps.clean --unused` if you change dependencies
 * `mix compile --warnings-as-errors` for a stricter compile
 * `mix coveralls.html` to check for test coverage
-* `mix credo --strict` to suggest more idiomatic style for your code
+* `mix credo` to suggest more idiomatic style for your code
 * `mix dialyzer` to find problems typing might reveal… albeit *slowly*
-* `touch lib/pretty.ex && mix docs` to generate documentation
+* `mix docs` to generate documentation
 
 <!-- MDOC -->
 <!-- INCLUDE -->
@@ -210,9 +210,16 @@ handler and write to it explicitly from inside the handler:
 ```elixir
 device = Process.group_leader()
 handler = fn name, m10s, m6a, nil ->
-IO.inspect(device, {name, m10s, m6a}, label: "Ecto")
+  IO.inspect(device, {name, m10s, m6a}, label: "Ecto")
 end
 :telemetry.attach(self(), [:my_app, :repo, :query], handler, nil)
+```
+
+You can _almost_ get it down to a one-liner if you lose the label:
+
+```elixir
+dev = Process.group_leader()
+:telemetry.attach(self(), [:my_app, :repo, :query], &IO.inspect(&4, {&1, &2, &3}, []), dev)
 ```
 
 ### The Case of the Missing Colors

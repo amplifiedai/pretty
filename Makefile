@@ -1,25 +1,36 @@
+# https://tech.davis-hansson.com/p/make/
+SHELL := bash
+.ONESHELL:
+.SHELLFLAGS := -eu -o pipefail -c
+.DELETE_ON_ERROR:
+MAKEFLAGS += --warn-undefined-variables
+MAKEFLAGS += --no-builtin-rules
+
+SOURCE := $(shell find lib -name \*.ex)
+TEST := $(shell find test -name \*.ex)
+
 .PHONY: check clean
 
-check: deps lib/pretty.ex
-	mix format --check-formatted --dry-run --check-equivalent
-	mix compile --warnings-as-errors
-	mix coveralls.html
-	mix credo --strict
+check: _build/dev _build/test
+	mix test
+	mix credo
 	mix dialyzer
 	mix docs
+	mix format
 	@echo "OK"
 
-mix.lock: mix.exs
+mix.lock deps: mix.exs
 	mix deps.get
 	mix deps.unlock --unused
 	mix deps.clean --unused
 	touch $@
 
-deps: mix.lock
-	mix deps.get
+_build/dev: deps $(SOURCE)
+	MIX_ENV=dev mix compile --warnings-as-errors
 	touch $@
 
-lib/pretty.ex: README.md
+_build/test: deps $(SOURCE) $(TEST)
+	MIX_ENV=test mix compile --warnings-as-errors
 	touch $@
 
 clean:

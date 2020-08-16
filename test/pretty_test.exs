@@ -184,14 +184,14 @@ defmodule PrettyTest do
 
   describe "width/1 (internal)" do
     test "device without columns" do
-      device = open_test_device() |> expect({:get_geometry, :columns}, {:error, :enotsup})
+      device = expect(open_test_device(), {:get_geometry, :columns}, {:error, :enotsup})
       default_width = %Inspect.Opts{}.width
       assert ^default_width = Pretty.width(device)
       check!(device)
     end
 
     test "device with columns" do
-      device = open_test_device() |> expect({:get_geometry, :columns}, 98)
+      device = expect(open_test_device(), {:get_geometry, :columns}, 98)
       assert 98 = Pretty.width(device)
       check!(device)
     end
