@@ -1,24 +1,22 @@
 defmodule Pretty.MixProject do
   use Mix.Project
 
+  @source_url "https://github.com/amplifiedai/pretty"
   @version "1.0.8"
 
   def project do
     [
       app: :pretty,
-      deps: deps(),
-      description: "Inspect values with syntax colors despite your remote console.",
-      docs: docs(),
+      version: @version,
+      name: "Pretty",
       elixir: "~> 1.8",
       elixirc_paths: elixirc_paths(Mix.env()),
-      homepage_url: "https://github.com/amplifiedai/pretty",
-      name: "Pretty",
+      deps: deps(),
+      docs: docs(),
       package: package(),
       preferred_cli_env: [coveralls: :test, "coveralls.html": :test, "coveralls.json": :test],
-      source_url: "https://github.com/amplifiedai/pretty",
       start_permanent: Mix.env() == :prod,
-      test_coverage: [tool: ExCoveralls],
-      version: @version
+      test_coverage: [tool: ExCoveralls]
     ]
   end
 
@@ -32,7 +30,7 @@ defmodule Pretty.MixProject do
     [
       {:credo, "~> 1.5", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 1.1", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.24.0", only: :dev, runtime: false},
+      {:ex_doc, ">= 0.0.0", only: :dev, runtime: false},
       {:excoveralls, "~> 0.14.1", only: :test, runtime: false},
       {:mix_test_watch, "~> 1.0", only: :dev, runtime: false}
     ]
@@ -40,11 +38,13 @@ defmodule Pretty.MixProject do
 
   defp docs do
     [
-      api_reference: false,
-      authors: ["Garth Kidd"],
-      canonical: "http://hexdocs.pm/pretty",
       main: "Pretty",
-      source_ref: "v#{@version}"
+      canonical: "http://hexdocs.pm/pretty",
+      source_url: @source_url,
+      source_ref: "v#{@version}",
+      homepage_url: @source_url,
+      formatters: ["html"],
+      api_reference: false
     ]
   end
 
@@ -53,13 +53,14 @@ defmodule Pretty.MixProject do
 
   defp package do
     [
-      files: ~w(mix.exs README.md lib test/support),
-      licenses: ["Apache 2.0"],
+      description: "Inspect values with syntax colors despite your remote console.",
+      files: ~w(mix.exs README.md LICENSE.md lib test/support),
+      maintainers: ["Garth Kidd"],
+      licenses: ["Apache-2.0"],
       links: %{
         "Amplified" => "https://www.amplified.ai",
-        "GitHub" => "https://github.com/amplifiedai/pretty"
-      },
-      maintainers: ["Garth Kidd"]
+        "GitHub" => @source_url
+      }
     ]
   end
 end
